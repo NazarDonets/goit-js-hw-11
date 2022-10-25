@@ -1,5 +1,7 @@
 * {
    box-sizing: border-box;
+   margin: 0;
+   padding: 0;
 }
 
 body {
@@ -10,4 +12,118 @@ body {
    background-color: #fafafa;
    color: #212121;
    line-height: 1.5;
+   margin: 0;
+   padding: 0;
+   position: relative;
+}
+
+.container {
+   padding-left: 30px;
+   padding-right: 30px;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+}
+
+.header {
+   width: 100%;
+   background-color: rgb(198, 217, 255);
+   margin: 0;
+   padding: 0;
+   top: 0;
+   position: fixed;
+}
+
+.search-form {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   position: relative;
+}
+
+.search-form__input {
+   width: 280px;
+   height: 50px;
+   padding-right: 50px;
+   padding-left: 8px;
+   font-family: monospace, serif;
+   font-size: 1.1rem;
+   border: none;
+}
+
+.search-form__input:focus-within,
+.search-form__input:focus {
+   outline: none;
+}
+
+.search-form__submit-btn,
+.js-loadmore {
+   background-color: rgb(57, 96, 255);
+   color: white;
+   border: 0;
+   height: 50px;
+   padding-left: 10px;
+   padding-right: 10px;
+   font-family: monospace;
+   font-size: 24px;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+}
+
+.gallery {
+   margin: 80px 0 0 0;
+   padding: 0;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 20px;
+   list-style: none;
+}
+
+.photo-card {
+   width: 360px;
+   min-width: 10vw;
+   outline: 2px solid rgb(198, 217, 255);
+}
+
+.photo-card__link {
+   display: block;
+   cursor: pointer;
+}
+
+.photo-card__image {
+   display: block;
+   width: 100%;
+   height: 250px;
+   object-fit: cover;
+}
+
+.info {
+   display: flex;
+   justify-content: space-between;
+   padding: 10px;
+}
+
+.info-item {
+   text-align: center;
+   font-family: monospace;
+   max-width: min-content;
+}
+
+.info-item__value {
+   font-weight: lighter;
+}
+
+.hide {
+   display: none;
+}
+
+.js-loadmore {
+   position: relative;
+   margin-top: 20px;
+   margin-bottom: 40px;
+   left: 50%;
+   transform: translateX(-50%);
 }

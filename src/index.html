@@ -7,15 +7,29 @@
       <title>Homework 10</title>
    </head>
    <body>
-      <form class="search-form" id="search-form">
-         <input
-            type="text"
-            name="searchQuery"
-            autocomplete="off"
-            placeholder="Search images..."
-         />
-         <button type="submit">Search</button>
-      </form>
+      <header class="header">
+         <div class="container">
+            <form class="search-form" id="search-form">
+               <input
+                  class="search-form__input"
+                  type="text"
+                  name="searchQuery"
+                  autocomplete="off"
+                  placeholder="Search images..."
+                  maxlength="22"
+               />
+               <button class="search-form__submit-btn" type="submit">
+                  search
+               </button>
+            </form>
+         </div>
+      </header>
+      <main>
+         <div class="container">
+            <ul class="gallery"></ul>
+            <button class="js-loadmore hide">load more</button>
+         </div>
+      </main>
       <script src="index.js" type="module"></script>
    </body>
 </html>
