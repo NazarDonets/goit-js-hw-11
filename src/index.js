@@ -36,9 +36,6 @@ async function fetchAPI(query) {
             per_page: itemsPerPage,
             ...defaultParams,
          },
-         headers: {
-            SameSite: 'none',
-         },
       });
       return data;
    } catch (error) {
