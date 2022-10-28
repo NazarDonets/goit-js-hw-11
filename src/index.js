@@ -1,47 +1,26 @@
 import './css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'notiflix/dist/notiflix-3.2.5.min.css';
-import axios from 'axios';
 import cardTemplate from './templates/cardTemplate.hbs';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import fetchAPI from './api-service.js';
 
-const BASE_URL = 'https://pixabay.com/api/';
-const API_KEY = '30528921-8e859357d7a6bf61cd9b66029';
 const formEl = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const searchInputEl = formEl.elements.searchQuery;
-let searchQuery = '';
+const submitBtnText = document.querySelector('.submit-btn__text');
 const loadMoreBtn = document.querySelector('.js-loadmore');
-const itemsPerPage = 20;
-let currentPage = 1;
+const loadMoreBtnText = document.querySelector('.js-loadmore__text');
+const loaderLoadMoreBtnEl = document.querySelector('.loader-container');
+const loaderSubmitBtnEl = document.querySelector(
+   '.loader-container__submit-btn'
+);
+let searchQuery = '';
+export const itemsPerPage = 40;
+export let currentPage = 1;
 
 var lightbox = new SimpleLightbox('.gallery a');
-
-const defaultParams = {
-   image_type: 'photo',
-   orientation: 'horizontal',
-   safesearch: true,
-};
-
-document.cookie = 'witcher=Geralt; SameSite=None; Secure';
-
-async function fetchAPI(query) {
-   try {
-      const { data } = await axios.get(BASE_URL, {
-         params: {
-            key: API_KEY,
-            q: query.trim(),
-            page: currentPage,
-            per_page: itemsPerPage,
-            ...defaultParams,
-         },
-      });
-      return data;
-   } catch (error) {
-      console.log(`${error} - but it doesn't really do anything`);
-   }
-}
 
 function scrollToTheLastRow() {
    const { height: cardHeight } = document
@@ -49,7 +28,7 @@ function scrollToTheLastRow() {
       .firstElementChild.getBoundingClientRect();
 
    window.scrollBy({
-      top: cardHeight * 5,
+      top: cardHeight * 3,
       behavior: 'smooth',
    });
 }
@@ -66,23 +45,31 @@ function renderUI({ hits, totalHits }, inputValue) {
    lightbox.refresh();
 }
 
-formEl.addEventListener('submit', e => {
+function getFirstResults(e) {
    e.preventDefault();
    searchQuery = searchInputEl.value;
-
    gallery.innerHTML = '';
-
+   submitBtnText.textContent = '';
+   loaderSubmitBtnEl.classList.remove('hide');
    fetchAPI(searchQuery).then(data => {
       renderUI(data, searchQuery);
+      submitBtnText.textContent = 'search';
+      loaderSubmitBtnEl.classList.add('hide');
    });
-});
+}
 
 function getNextPage() {
    currentPage += 1;
+   loadMoreBtnText.textContent = 'loading';
+   loaderLoadMoreBtnEl.classList.remove('hide');
    fetchAPI(searchQuery).then(data => {
       renderUI(data, searchQuery);
       scrollToTheLastRow();
+      loadMoreBtnText.textContent = 'load more';
+      loaderLoadMoreBtnEl.classList.add('hide');
    });
 }
+
+formEl.addEventListener('submit', e => getFirstResults(e));
 
 loadMoreBtn.addEventListener('click', getNextPage);

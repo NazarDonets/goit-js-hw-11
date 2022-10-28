@@ -19,7 +19,17 @@
                   maxlength="22"
                />
                <button class="search-form__submit-btn" type="submit">
-                  search
+                  <span class="submit-btn__text">search</span>
+                  <!-- LOADER -->
+                  <div class="loader-container__submit-btn hide">
+                     <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                     </div>
+                  </div>
+                  <!-- /LOADER -->
                </button>
             </form>
          </div>
@@ -27,7 +37,19 @@
       <main>
          <div class="container">
             <ul class="gallery"></ul>
-            <button class="js-loadmore hide">load more</button>
+            <button class="js-loadmore hide">
+               <span class="js-loadmore__text">load more</span>
+               <!-- LOADER -->
+               <div class="loader-container hide">
+                  <div class="lds-ellipsis">
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                     <div></div>
+                  </div>
+               </div>
+               <!-- /LOADER -->
+            </button>
          </div>
       </main>
       <script src="index.js" type="module"></script>
